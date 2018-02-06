@@ -368,6 +368,7 @@
 				}]
 			);
 
+			var autocloseOutside = this.o.autocloseOutside;
 			this._secondaryEvents = [
 				[this.picker, {
 					click: $.proxy(this.click, this)
@@ -377,6 +378,8 @@
 				}],
 				[$(document), {
 					'mousedown touchstart': $.proxy(function(e){
+						if(!autocloseOutside) return;
+						
 						// Clicked outside the datepicker, hide it
 						if (!(
 							this.element.is(e.target) ||
@@ -1508,6 +1511,7 @@
 
 	var defaults = $.fn.datepicker.defaults = {
 		autoclose: false,
+		autocloseOutside: true,
 		beforeShowDay: $.noop,
 		beforeShowMonth: $.noop,
 		calendarWeeks: false,
